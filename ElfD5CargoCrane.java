@@ -14,7 +14,7 @@ public class ElfD5CargoCrane {
 
     public static void main(String arg[]) {
         ElfD5CargoCrane elf = new ElfD5CargoCrane();
-        List<String> dataList = elf.readFile("5.test.txt");
+        List<String> dataList = elf.readFile("5.txt");
         HashMap<Integer, Stack<Character>> hs = new HashMap<Integer, Stack<Character>>();
         ArrayList<Character> A1 = new ArrayList<Character>(Arrays.asList('B', 'Z', 'T'));
         ArrayList<Character> A2 = new ArrayList<Character>(Arrays.asList('V', 'H', 'T', 'D', 'N'));
@@ -32,17 +32,17 @@ public class ElfD5CargoCrane {
         Stack<Character> three = new Stack<Character>();
         three.addAll(A3);
         Stack<Character> four = new Stack<Character>();
-        one.addAll(A4);
+        four.addAll(A4);
         Stack<Character> five = new Stack<Character>();
-        two.addAll(A5);
+        five.addAll(A5);
         Stack<Character> six = new Stack<Character>();
-        three.addAll(A6);
+        six.addAll(A6);
         Stack<Character> seven = new Stack<Character>();
-        one.addAll(A7);
+        seven.addAll(A7);
         Stack<Character> eight = new Stack<Character>();
-        two.addAll(A8);
+        eight.addAll(A8);
         Stack<Character> nine = new Stack<Character>();
-        three.addAll(A9);
+        nine.addAll(A9);
         System.out.println("Full" + one + " " + two + " " + three);
         hs.put(1, one);
         hs.put(2, two);
