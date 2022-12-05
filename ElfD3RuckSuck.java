@@ -4,7 +4,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.*;
 
-public class ElfRuckSuck {
+public class ElfD3RuckSuck {
 
     public static List<String> readFileByLines(String fileName) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(fileName));

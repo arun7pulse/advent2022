@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class ElfStonePaperScissor {
+public class Elf2DStonePaperScissor {
     private Map<String, Integer> handSymbolPoint;
     private Map<String, Integer> resultPoints;
 
@@ -25,7 +25,7 @@ public class ElfStonePaperScissor {
     }
 
     public static void main(String arg[]) {
-        ElfStonePaperScissor elf = new ElfStonePaperScissor();
+        Elf2DStonePaperScissor elf = new Elf2DStonePaperScissor();
         elf.setGamePoints();
         // elf.calcGameScoreByElfPatternGiven("day2-inputfile1.txt");
         elf.calcGameScoreByRndNeedsToEnd("2.txt");

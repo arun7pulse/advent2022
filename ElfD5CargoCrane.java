@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -8,9 +9,75 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
-import javax.sound.sampled.DataLine;
-
 public class ElfD5CargoCrane {
+
+    public static String findPart2(List<String> dataList, HashMap<Integer, Stack<Character>> hs2) {
+        System.out.println(hs2);
+        for (String data : dataList) {
+            String[] val = data.split("\\s");
+            int loop = Integer.parseInt(val[0]);
+            int fromstack = Integer.parseInt(val[1]);
+            int toStack = Integer.parseInt(val[2]);
+
+            if (loop == 1) {
+                for (int i = 0; i < loop; i++) {
+                    char item = hs2.get(fromstack).pop();
+                    // System.out.println("popped " + item);
+                    hs2.get(toStack).push(item);
+                    // System.out.println("Pushed stack " + hs.get(toStack));
+                    // System.out.println("Each move " + hs);
+                }
+            } else if (loop > 1) {
+                Stack<Character> tempStack = new Stack<>();
+                // System.out.println("toStack " + hs.get(toStack));
+                for (int i = 0; i < loop; i++) {
+                    char item = hs2.get(fromstack).pop();
+                    tempStack.push(item); // D, N, Z
+                }
+                // System.out.println("tempstack " + tempStack);
+                int fixedSize = tempStack.size();
+                for (int i = 0; i < fixedSize; i++) {
+                    // System.out.println(" temp stack size" + tempStack.size());
+                    char item = tempStack.pop();
+                    hs2.get(toStack).push(item); // P, Z, N, D
+                }
+                // System.out.println("after merge " + hs.get(toStack));
+            }
+
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int j = 1; j <= hs2.size(); j++) {
+            sb.append(hs2.get(j).peek());
+        }
+        return sb.toString();
+    }
+
+    public static String findPart1(List<String> dataList, HashMap<Integer, Stack<Character>> hs1) {
+        System.out.println(hs1);
+        for (String data : dataList) {
+            // System.out.println(data + "\n");
+
+            String[] val = data.split("\\s");
+            int loop = Integer.parseInt(val[0]);
+            int fromstack = Integer.parseInt(val[1]);
+            int toStack = Integer.parseInt(val[2]);
+
+            for (int i = 0; i < loop; i++) {
+                char item = hs1.get(fromstack).pop();
+                // System.out.println("popped " + item);
+                hs1.get(toStack).push(item);
+                // System.out.println("Pushed stack " + hs.get(toStack));
+                // System.out.println("Each move " + hs);
+            }
+
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int j = 1; j <= hs1.size(); j++) {
+            sb.append(hs1.get(j).peek());
+        }
+        return sb.toString();
+
+    }
 
     public static void main(String arg[]) {
         ElfD5CargoCrane elf = new ElfD5CargoCrane();
@@ -25,6 +92,7 @@ public class ElfD5CargoCrane {
         ArrayList<Character> A7 = new ArrayList<Character>(Arrays.asList('Z', 'S', 'N', 'R', 'L', 'T', 'C', 'W'));
         ArrayList<Character> A8 = new ArrayList<Character>(Arrays.asList('Z', 'H', 'W', 'D', 'J', 'N', 'R', 'M'));
         ArrayList<Character> A9 = new ArrayList<Character>(Arrays.asList('M', 'Q', 'L', 'F', 'D', 'S'));
+
         Stack<Character> one = new Stack<Character>();
         one.addAll(A1);
         Stack<Character> two = new Stack<Character>();
@@ -43,7 +111,7 @@ public class ElfD5CargoCrane {
         eight.addAll(A8);
         Stack<Character> nine = new Stack<Character>();
         nine.addAll(A9);
-        System.out.println("Full" + one + " " + two + " " + three);
+
         hs.put(1, one);
         hs.put(2, two);
         hs.put(3, three);
@@ -53,60 +121,11 @@ public class ElfD5CargoCrane {
         hs.put(7, seven);
         hs.put(8, eight);
         hs.put(9, nine);
-        // 0 0 0 0 0 T Z B
-        // 0 0 0 N D T H V
-        // 0 0 0 0 D M F B
-        // 0 L Q V W G J T
-        // M Q F V P G D W
-        // 0 S F H G Q Z V
-        // W C T L R N S Z
-        // M R N J D W H Z
-        // 0 0 S D F L Q M
-
-        // HashMap<Integer, Stack<Character>> hs = new HashMap<Integer,
-        // Stack<Character>>();
-        // ArrayList<Character> A1 = new ArrayList<Character>(Arrays.asList('Z', 'N'));
-        // ArrayList<Character> A2 = new ArrayList<Character>(Arrays.asList('M', 'C',
-        // 'D'));
-        // ArrayList<Character> A3 = new ArrayList<Character>(Arrays.asList('P'));
-
-        // Stack<Character> one = new Stack<Character>();
-        // one.addAll(A1);
-        // Stack<Character> two = new Stack<Character>();
-        // two.addAll(A2);
-        // Stack<Character> three = new Stack<Character>();
-        // three.addAll(A3);
-        // System.out.println("Full" + one + " " + two + " " + three);
-        // hs.put(1, one);
-        // hs.put(2, two);
-        // hs.put(3, three);
-
-        // move 1 from 2 to 1
-        // move 3 from 1 to 3
-        // move 2 from 2 to 1
-        // move 1 from 1 to 2
-        for (String data : dataList) {
-            System.out.println(data + "\n");
-
-            String[] val = data.split("\\s");
-            int loop = Integer.parseInt(val[0]);
-            int fromstack = Integer.parseInt(val[1]);
-            int toStack = Integer.parseInt(val[2]);
-
-            for (int i = 0; i < loop; i++) {
-                char item = hs.get(fromstack).pop();
-                // System.out.println("popped " + item);
-                hs.get(toStack).push(item);
-                // System.out.println("Pushed stack " + hs.get(toStack));
-                System.out.println("Each move " + hs);
-            }
-
-        }
-        StringBuilder sb = new StringBuilder();
-        for (int j = 1; j <= hs.size(); j++) {
-            sb.append(hs.get(j).peek());
-        }
-        System.out.println("Part1 Answer " + sb.toString());
+        System.out.println(hs);
+        HashMap<Integer, Stack<Character>> hs2 = hs;
+        System.out.println("Day5 Part1 " + findPart1(dataList, hs));
+        System.out.println(hs2);
+        System.out.println("Day5 Part2 " + findPart2(dataList, hs2));
 
     }
 
@@ -137,59 +156,4 @@ public class ElfD5CargoCrane {
         }
         return dataList;
     }
-
-    public void findCargoCrane(List<String> dataList) {
-        try {
-            int totalOverlapFound = 0;
-
-            for (String data : dataList) {
-                List<String> dataVal = Arrays.asList(data.split(","));
-                // System.out.println(dataVal);
-                String[] firstSection = dataVal.get(0).split("-");
-                String[] secondSection = dataVal.get(1).split("-");
-
-                if ((Integer.valueOf(firstSection[0]) <= Integer.valueOf(secondSection[0])
-                        && Integer.valueOf(firstSection[1]) >= Integer.valueOf(secondSection[1]))
-                        || (Integer.valueOf(secondSection[0]) <= Integer.valueOf(firstSection[0])
-                                && Integer.valueOf(secondSection[1]) >= Integer.valueOf(firstSection[1]))) {
-                    totalOverlapFound++;
-                }
-            }
-
-            System.out.println("Cargo Grane : " + totalOverlapFound);
-        } catch (Exception e) {
-            System.out.println("An error occurred." + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    public void findCampCleanupSectionPartialOverlap(List<String> dataList) {
-        try {
-            int totalOverlapFound = 0;
-            for (String data : dataList) {
-                List<String> dataVal = Arrays.asList(data.split(","));
-                // System.out.println(dataVal);
-                String[] firstSection = dataVal.get(0).split("-");
-                String[] secondSection = dataVal.get(1).split("-");
-
-                // Single section 1 item there is overlap. Using Between logic
-                if ((Integer.valueOf(firstSection[0]) >= Integer.valueOf(secondSection[0])
-                        && Integer.valueOf(firstSection[0]) <= Integer.valueOf(secondSection[1]))
-                        || (Integer.valueOf(firstSection[1]) >= Integer.valueOf(secondSection[0])
-                                && Integer.valueOf(firstSection[1]) <= Integer.valueOf(secondSection[1]))
-                        || (Integer.valueOf(secondSection[0]) >= Integer.valueOf(firstSection[0])
-                                && Integer.valueOf(secondSection[0]) <= Integer.valueOf(firstSection[1]))
-                        || (Integer.valueOf(secondSection[1]) >= Integer.valueOf(firstSection[0])
-                                && Integer.valueOf(secondSection[1]) <= Integer.valueOf(firstSection[1]))) {
-                    totalOverlapFound++;
-                }
-            }
-
-            System.out.println("Cargo Crane : " + totalOverlapFound);
-        } catch (Exception e) {
-            System.out.println("An error occurred." + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
 }
