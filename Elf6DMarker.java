@@ -23,20 +23,21 @@ public class Elf6DMarker {
         // System.out.println(lines);
         System.out.println("Part1 Ans " + findPart1(lines));
         // Day Part2
-        // System.out.println("Part2 Ans " + findPart2(lines));
+        System.out.println("Part2 Ans " + findPart2(lines));
 
     }
 
     private static int findPart1(List<String> lines) {
         // String result = " ";
-        System.out.println("Lines" + lines);
+        // System.out.println("Lines" + lines);
         String A = lines.get(0);
         int n = A.length();
         int marker = 0;
 
         for (int i = 3; i < n; i++) {
             HashSet<Character> s = new HashSet<Character>();
-            System.out.println(A.charAt(i - 3) + " " + A.charAt(i - 2) + " " + A.charAt(i - 1) + " " + A.charAt(i));
+            // System.out.println(A.charAt(i - 3) + " " + A.charAt(i - 2) + " " + A.charAt(i
+            // - 1) + " " + A.charAt(i));
             s.add(A.charAt(i - 3));
             s.add(A.charAt(i - 2));
             s.add(A.charAt(i - 1));
@@ -45,17 +46,38 @@ public class Elf6DMarker {
                 marker = i + 1;
                 break;
             }
-            // if (A.charAt(i - 3) != A.charAt(i - 2)
-            // || A.charAt(i - 3) != A.charAt(i - 1)
-            // || A.charAt(i - 3) != A.charAt(i)
-            // || A.charAt(i - 2) != A.charAt(i - 1)
-            // || A.charAt(i - 2) != A.charAt(i)
-            // || A.charAt(i - 1) != A.charAt(i)) {
-            // System.out.println("Yes Yes");
-            // marker = i;
-            // break;
-            // }
+        }
+        return marker;
+    }
 
+    private static int findPart2(List<String> lines) {
+        // String result = " ";
+        // System.out.println("Lines" + lines);
+        String A = lines.get(0);
+        int n = A.length();
+        int marker = 0;
+
+        for (int i = 13; i < n; i++) {
+            HashSet<Character> s = new HashSet<Character>();
+            s.add(A.charAt(i - 13));
+            s.add(A.charAt(i - 12));
+            s.add(A.charAt(i - 11));
+            s.add(A.charAt(i - 10));
+            s.add(A.charAt(i - 9));
+            s.add(A.charAt(i - 8));
+            s.add(A.charAt(i - 7));
+            s.add(A.charAt(i - 6));
+            s.add(A.charAt(i - 5));
+            s.add(A.charAt(i - 4));
+            s.add(A.charAt(i - 3));
+            s.add(A.charAt(i - 2));
+
+            s.add(A.charAt(i - 1));
+            s.add(A.charAt(i));
+            if (s.size() == 14) {
+                marker = i + 1;
+                break;
+            }
         }
         return marker;
     }
