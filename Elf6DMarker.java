@@ -1,15 +1,14 @@
-import java.io.File;
+// import java.io.File;
 
-import java.io.FileNotFoundException;
+// import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
+// import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
+// import java.util.ArrayList;
+// import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 
 public class Elf6DMarker {
     public static List<String> readFileByLines(String fileName) throws IOException {
