@@ -10,10 +10,17 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class ElfD5ListDir {
-
+    // /
+    // a d
+    // e
+    // 29116 4060174
+    // 2557 8033020
+    // 62596 5626152
+    // 7214296
+    // 584
     public static void main(String arg[]) {
         ElfD5ListDir elf = new ElfD5ListDir();
-        List<String> A = elf.readFile("7.txt");
+        List<String> A = elf.readFile("7.test.txt");
         System.out.println(A);
 
         int n = A.size();
@@ -25,7 +32,7 @@ public class ElfD5ListDir {
         // Stack<HashMap<String, Integer>> stk = new Stack<HashMap<String, Integer>>();
         Stack<String> stk = new Stack<String>();
         String lastDir = "";
-
+        int count = 0;
         for (int i = 0; i < n; i++) {
             String[] val = A.get(i).split(" ");
             // System.out.println("Processing " + A.get(i));
@@ -33,20 +40,21 @@ public class ElfD5ListDir {
                 String cmd = val[1];
                 String path = val[2];
                 if (path.equals("..")) {
-                    String s = stk.pop();
-                    System.out.println("popped " + s);
                     lastDir = stk.peek();
-                    int sval = hs.get(s);
-                    String root = stk.peek();
-                    hs.put(root, hs.get(root) + sval);
+                    int sval = hs.get(lastDir);
+                    System.out.println("popped " + stk.pop());
+                    hs.put(stk.peek(), hs.get(stk.peek()) + sval);
+                    hs.remove(lastDir);
+                    System.out.println("1.0 " + cmd + " " + path + " " + stk + " hs" + hs + " last " + lastDir);
                 }
 
                 if (!path.equals(" ") && !path.equals("..")) {
                     stk.push(path);
                     lastDir = stk.peek();
                     hs.put(lastDir, 0);
+                    System.out.println("1.1 " + cmd + " " + path + " " + stk + " hs" + hs + " last " + lastDir);
                 }
-                System.out.println("1.1 " + cmd + " " + path + " " + stk + " hs" + hs + " last " + lastDir);
+
             } else if (val.length == 2) {
                 String cmd = val[0];
                 String path = val[1];
@@ -61,6 +69,8 @@ public class ElfD5ListDir {
                     }
                 }
             }
+            System.out.println(count);
+            count++;
 
         }
         System.out.println("2.X " + stk + " hs" + hs + " last " + lastDir);
