@@ -2,12 +2,17 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
+// import java.security.KeyStore.Entry;
 import java.util.ArrayList;
-import java.util.Arrays;
+// import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Map.Entry;
+
+import javax.sound.sampled.SourceDataLine;
 
 public class ElfD5ListDir {
     // /
@@ -20,7 +25,7 @@ public class ElfD5ListDir {
     // 584
     public static void main(String arg[]) {
         ElfD5ListDir elf = new ElfD5ListDir();
-        List<String> A = elf.readFile("7.test.txt");
+        List<String> A = elf.readFile("7.txt");
         System.out.println(A);
 
         int n = A.size();
@@ -40,11 +45,13 @@ public class ElfD5ListDir {
                 String cmd = val[1];
                 String path = val[2];
                 if (path.equals("..")) {
+                    System.out.println("0.0 " + cmd + " " + path + " " + stk + " hs" + hs + " last " + lastDir);
                     lastDir = stk.peek();
                     int sval = hs.get(lastDir);
-                    System.out.println("popped " + stk.pop());
+                    String popped = stk.pop();
+                    // System.out.println("popped " + popped());
                     hs.put(stk.peek(), hs.get(stk.peek()) + sval);
-                    hs.remove(lastDir);
+                    // hs.remove(lastDir);
                     System.out.println("1.0 " + cmd + " " + path + " " + stk + " hs" + hs + " last " + lastDir);
                 }
 
@@ -69,12 +76,17 @@ public class ElfD5ListDir {
                     }
                 }
             }
-            System.out.println(count);
+            // System.out.println(count);
             count++;
-
         }
         System.out.println("2.X " + stk + " hs" + hs + " last " + lastDir);
-
+        int maxValue = 0;
+        for (Entry<String, Integer> set : hs.entrySet()) {
+            System.out.println(set.getKey() + " = " + set.getValue());
+            if (set.getValue() <= 100000 && set.getValue() > maxValue)
+                maxValue += set.getValue();
+        }
+        System.out.println("Max Value " + maxValue);
     }
 
     private File getResourceFile(final String fileName) {
