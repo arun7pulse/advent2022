@@ -13,7 +13,7 @@ public class ElfD5ListDir {
 
     public static void main(String arg[]) {
         ElfD5ListDir elf = new ElfD5ListDir();
-        List<String> A = elf.readFile("7.test.txt");
+        List<String> A = elf.readFile("7.txt");
         System.out.println(A);
 
         int n = A.size();
@@ -35,6 +35,7 @@ public class ElfD5ListDir {
                 if (path.equals("..")) {
                     String s = stk.pop();
                     System.out.println("popped " + s);
+                    lastDir = stk.peek();
                     int sval = hs.get(s);
                     String root = stk.peek();
                     hs.put(root, hs.get(root) + sval);
@@ -44,7 +45,6 @@ public class ElfD5ListDir {
                     stk.push(path);
                     lastDir = stk.peek();
                     hs.put(lastDir, 0);
-
                 }
                 System.out.println("1.1 " + cmd + " " + path + " " + stk + " hs" + hs + " last " + lastDir);
             } else if (val.length == 2) {
@@ -63,6 +63,7 @@ public class ElfD5ListDir {
             }
 
         }
+        System.out.println("2.X " + stk + " hs" + hs + " last " + lastDir);
 
     }
 
