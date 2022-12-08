@@ -7,12 +7,12 @@ import java.util.ArrayList;
 // import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+// import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.Map.Entry;
 
-import javax.sound.sampled.SourceDataLine;
+// import javax.sound.sampled.SourceDataLine;
 
 public class ElfD7ListDir {
     // /
@@ -32,12 +32,12 @@ public class ElfD7ListDir {
         for (int j = 0; j < n; j++)
             System.out.println(A.get(j));
         System.out.println();
-        int sum = 0;
+        // int sum = 0;
         HashMap<String, Integer> hs = new HashMap<String, Integer>();
         // Stack<HashMap<String, Integer>> stk = new Stack<HashMap<String, Integer>>();
         Stack<String> stk = new Stack<String>();
         String lastDir = "";
-        int count = 0;
+        // int count = 0;
         for (int i = 0; i < n; i++) {
             String[] val = A.get(i).split(" ");
             // System.out.println("Processing " + A.get(i));
@@ -77,7 +77,7 @@ public class ElfD7ListDir {
                 }
             }
             // System.out.println(count);
-            count++;
+            // count++;
         }
         System.out.println("2.X " + stk + " hs" + hs + " last " + lastDir);
         int maxValue = 0;
