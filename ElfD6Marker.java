@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
 
-public class Elf6DMarker {
+public class ElfD6Marker {
     public static List<String> readFileByLines(String fileName) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(fileName));
         return lines;

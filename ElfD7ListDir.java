@@ -14,7 +14,7 @@ import java.util.Map.Entry;
 
 import javax.sound.sampled.SourceDataLine;
 
-public class ElfD5ListDir {
+public class ElfD7ListDir {
     // /
     // a d
     // e
@@ -24,7 +24,7 @@ public class ElfD5ListDir {
     // 7214296
     // 584
     public static void main(String arg[]) {
-        ElfD5ListDir elf = new ElfD5ListDir();
+        ElfD7ListDir elf = new ElfD7ListDir();
         List<String> A = elf.readFile("7.txt");
         System.out.println(A);
 
